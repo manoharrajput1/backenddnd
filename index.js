@@ -15,7 +15,7 @@ app.use(cors({ origin: '*', 'Access-Control-Allow-Origin' : '*' }))
 app.use(express.urlencoded({ extended: true }))
 app.get('/getdata', async (req, res) => {
   const user = await Lschema.findAll()
-  res.send(user)
+  res.header(Access-Control-Allow-Origin: *).send(user)
 });
 
 app.post('/register', async (req, res) => {
@@ -31,7 +31,7 @@ app.post('/register', async (req, res) => {
     res.status(201).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Registration failed' });
+    res.header(Access-Control-Allow-Origin: *).json({ error: 'Registration failed' });
   }
 });
 
@@ -39,7 +39,7 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body
   const user = await User.findOne({ where: { username: username } })
   if (user.password === password) {
-    res.status(200).json({ message: 'Login successful' });
+    res.header(Access-Control-Allow-Origin: *).json({ message: 'Login successful' });
   }
 });
 
@@ -48,6 +48,7 @@ app.post('/createlist', async (req, res) => {
   console.log(listitem);
   await sequelize.sync()
   const user = await Lschema.create({ listitem: [listitem] })
+  res.header(Access-Control-Allow-Origin: *).send('created')
 });
 app.post('/updatelist', async (req, res) => {
   const { datas, listid, index } = req.body
@@ -67,6 +68,7 @@ app.post('/updatelist', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  res.header(Access-Control-Allow-Origin: *)
 });
 app.post('/deletelist', async (req, res) => {
   const { listid, index } = req.body
@@ -80,6 +82,7 @@ app.post('/deletelist', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  res.header(Access-Control-Allow-Origin: *)
 });
 
 
