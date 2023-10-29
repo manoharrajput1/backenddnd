@@ -10,7 +10,7 @@ const { where } = require('sequelize');
 
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors({ origin: '*' }))
+app.use(cors({ origin: '*', 'Access-Control-Allow-Origin' : '*' }))
 
 app.use(express.urlencoded({ extended: true }))
 app.get('/getdata', async (req, res) => {
